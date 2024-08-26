@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Calculator</title>
+    <style>
+
+       <style>
+        #calculator {
+            width: 220px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+        }
+
+        #display-screen {
+            width: 100%;
+            height: 50px;
+            text-align: right;
+            font-size: 20px;
+            margin-bottom: 10px;
+            padding-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004080;
+        }
+
+        #equal {
+            background-color: #28a745;
+        }
+
+        #equal:hover {
+            background-color: #218838;
+        }
+
+        #equal:active {
+            background-color: #1e7e34;
+        }
+
+        .clear {
+            background-color: #dc3545;
+        }
+
+        .clear:hover {
+            background-color: #c82333;
+        }
+
+        .clear:active {
+            background-color: #bd2130;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${message}"></h1>
+<div id="calculator">
+    <form th:action="@{/calculate}" id="calculator-form" method="post">
+        <input type="text" id="display-screen" name="operation" th:value="${calculator.operation}" readonly/>
+
+        <table>
+            <tr>
+                <td><button type="button" onclick="appendNumber(1)">1</button></td>
+                <td><button type="button" onclick="appendNumber(2)">2</button></td>
+                <td><button type="button" onclick="appendNumber(3)">3</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="appendNumber(4)">4</button></td>
+                <td><button type="button" onclick="appendNumber(5)">5</button></td>
+                <td><button type="button" onclick="appendNumber(6)">6</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="appendNumber(7)">7</button></td>
+                <td><button type="button" onclick="appendNumber(8)">8</button></td>
+                <td><button type="button" onclick="appendNumber(9)">9</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="appendNumber(0)">0</button></td>
+                <td><button type="button" onclick="appendOperation('+')">+</button></td>
+                <td><button type="button" onclick="appendOperation('-')">-</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="appendOperation('*')">*</button></td>
+                <td><button type="button" onclick="appendOperation('/')">/</button></td>
+                <td><button type="button" onclick="clearScreen()" class="clear">C</button></td>
+            </tr>
+            <tr>
+                <td colspan="3"><button id="equal" type="submit">=</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script>
+    function appendNumber(number) {
+        document.getElementById('display-screen').value += number;
+    }
+
+    function appendOperation(operation) {
+        document.getElementById('display-screen').value += operation;
+    }
+
+    function clearScreen() {
+        document.getElementById('display-screen').value = '';
+    }
+</script>
+</body>
+</html>
